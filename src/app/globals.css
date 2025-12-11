@@ -84,3 +84,19 @@ select,
 button {
   font: inherit;
 }
+
+/* ----------------------------------------
+   CIAN COLORS
+----------------------------------------- */
+:root {
+  --cian-blue: #4a9eff;
+  --cian-blue-dark: #3a7fcc;
+  --cian-orange: #ff6600;
+  --cian-orange-dark: #cc5500;
+  --cian-gray: #666;
+  --cian-gray-light: #f5f5f5;
+  --cian-gray-border: #e0e0e0;
+  --cian-red-dot: #ff3333;
+  --cian-white: #ffffff;
+  --cian-black: #000000;
+}
