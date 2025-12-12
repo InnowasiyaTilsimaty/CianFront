@@ -7,7 +7,7 @@
   }
   
   .topBar {
-    border-bottom: 1px solid var(--cian-gray-border);
+    // border-bottom: 1px solid var(--cian-gray-border);
   }
   
   .topBarContent {
@@ -105,6 +105,7 @@
   
   .navBar {
     background: var(--cian-white);
+    width: 100%;
   }
   
   .navContent {
@@ -116,14 +117,13 @@
     gap: 32px;
     scrollbar-width: none;
     -ms-overflow-style: none;
-  
     &::-webkit-scrollbar {
       display: none;
     }
   }
   
   .navItem {
-    position: relative;
+
     height: 100%;
     display: flex;
     align-items: center;
@@ -132,15 +132,7 @@
     &:has(.dropdown:hover) .navLink {
       color: var(--cian-blue);
       
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: var(--cian-blue);
-      }
+     
     }
   }
   
@@ -150,7 +142,6 @@
     font-size: 15px;
     font-weight: 400;
     white-space: nowrap;
-    position: relative;
     transition: color 0.2s;
     display: flex;
     align-items: center;
@@ -161,14 +152,13 @@
     position: absolute;
     top: 100%;
     left: 0;
-    height: 100%;
+    width: 100%;
     background: var(--cian-white);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-top: 1px solid var(--cian-blue);
-    min-width: 600px;
-    max-width: 1200px;
+    border-top: 1px solid  var(--cian-gray-border);
+ 
     z-index: 1001;
-    padding: 20px 32px;
+    padding: 50px 54px;
     animation: fadeIn 0.2s ease-in-out;
     margin-top: -1px;
   }
@@ -186,21 +176,26 @@
   
   .dropdownContent {
     display: flex;
-    gap: 48px;
+    justify-content: center;
+    gap: 80px;
   }
   
   .dropdownColumn {
-    flex: 1;
-    min-width: 180px;
+    min-width: 250px;
   }
   
   .dropdownTitle {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--cian-black);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     padding-bottom: 0;
+    display: block;
     border-bottom: none;
+    transition: color 0.2s ease;
+    &:hover {
+      color: var(--cian-blue);
+    }
   }
   
   .dropdownList {
@@ -215,7 +210,7 @@
   
   .dropdownLink {
     color: var(--cian-black);
-    font-size: 14px;
+    font-size: 16px;
     text-decoration: none;
     transition: color 0.2s;
     display: block;
@@ -237,6 +232,10 @@
     margin-bottom: 12px;
     padding-bottom: 0;
     border-bottom: none;
+    transition: color 0.2s ease;
+    &:hover {
+      color: var(--cian-blue);
+    }
   }
   
   .journalIcon {
@@ -244,6 +243,13 @@
     height: 18px;
     color: var(--cian-blue);
     flex-shrink: 0;
+  }
+
+  .dropdownImage {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
   }
   
   .redDot {
@@ -260,6 +266,31 @@
   
     &:hover {
       color: var(--cian-orange-dark);
+    }
+  }
+  .dropdownFooter{
+    margin-bottom: -30px;
+    padding-top: 30px;
+  }
+  .dropdownFooterList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+  }
+  .dropdownFooterLink {
+    color: var(--cian-black);
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+    display: block;
+    padding: 0;
+    line-height: 1.5;
+    &:hover {
+      color: var(--cian-blue);
     }
   }
   

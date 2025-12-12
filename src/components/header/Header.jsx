@@ -8,7 +8,7 @@ import { HiBookOpen } from 'react-icons/hi2';
 import { menuData } from './menuData';
 
 export default function Header() {
-  const [hoveredMenu, setHoveredMenu] = useState(null);
+  const [hoveredMenu, setHoveredMenu] = useState("arenda");
 
 
 
@@ -26,15 +26,28 @@ export default function Header() {
             return (
               <div key={colIndex} className={styles.dropdownColumn}>
                 {column.title && (
-                  <div className={styles.dropdownTitle}>{column.title}</div>
+                  <a href='#' className={styles.dropdownTitle}>{column.title}</a>
                 )}
                 {column.items.length > 0 && (
                   <ul className={styles.dropdownList}>
-                    {column.items.map((item, itemIndex) => (
-                      <li key={itemIndex}>
-                        <a href="#" className={styles.dropdownLink}>{item}</a>
-                      </li>
-                    ))}
+                    {column.items.map((item, itemIndex) => {
+                      const itemText = typeof item === 'string' ? item : item.text;
+                      const isTitle = typeof item === 'object' && item.isTitle;
+                      const isJournal = typeof item === 'object' && item.journal;
+                      
+                      return (
+                        <li key={itemIndex}>
+                          {isTitle ? (
+                            <a href="#" className={isJournal ? styles.journalHeader : styles.dropdownTitle}>
+                              {isJournal && <HiBookOpen className={styles.journalIcon} />}
+                              <span>{itemText}</span>
+                            </a>
+                          ) : (
+                            <a href="#" className={styles.dropdownLink}>{itemText}</a>
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 )}
                 {column.title && !column.items.length && (
@@ -44,21 +57,97 @@ export default function Header() {
             );
           })}
           {menu.journal && (
+            <>
+              {Array.isArray(menu.journal) ? (
+                menu.journal.map((journalItem, journalIndex) => (
+                  <div key={journalIndex} className={styles.dropdownColumn}>
+                    <a href="#" className={styles.journalHeader}>
+                      <HiBookOpen className={styles.journalIcon} />
+                      <span>{journalItem.title}</span>
+                    </a>
+                    {journalItem.articles && journalItem.articles.length > 0 && (
+                      <ul className={styles.dropdownList}>
+                        {journalItem.articles.map((article, index) => {
+                          const articleText = typeof article === 'string' ? article : article.text;
+                          const isTitle = typeof article === 'object' && article.isTitle;
+                          const isJournal = typeof article === 'object' && article.journal;
+                          
+                          return (
+                            <li key={index}>
+                              {isTitle ? (
+                                <a href="#" className={isJournal ? styles.journalHeader : styles.dropdownTitle}>
+                                  {isJournal && <HiBookOpen className={styles.journalIcon} />}
+                                  <span>{articleText}</span>
+                                </a>
+                              ) : (
+                                <a href="#" className={styles.dropdownLink}>{articleText}</a>
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </div>
+                ))
+              ) : (
+                <div className={styles.dropdownColumn}>
+                  <div className={styles.journalHeader}>
+                    <HiBookOpen className={styles.journalIcon} />
+                    <span>{menu.journal.title}</span>
+                  </div>
+                  {menu.journal.articles && menu.journal.articles.length > 0 && (
+                    <ul className={styles.dropdownList}>
+                      {menu.journal.articles.map((article, index) => {
+                        const articleText = typeof article === 'string' ? article : article.text;
+                        const isTitle = typeof article === 'object' && article.isTitle;
+                        const isJournal = typeof article === 'object' && article.journal;
+                        
+                        return (
+                          <li key={index}>
+                            {isTitle ? (
+                              <div className={isJournal ? styles.journalHeader : styles.dropdownTitle}>
+                                {isJournal && <HiBookOpen className={styles.journalIcon} />}
+                                <span>{articleText}</span>
+                              </div>
+                            ) : (
+                              <a href="#" className={styles.dropdownLink}>{articleText}</a>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                </div>
+              )}
+            </>
+          )}
+          {menu.image && (
             <div className={styles.dropdownColumn}>
-              <div className={styles.journalHeader}>
-                <HiBookOpen className={styles.journalIcon} />
-                <span>{menu.journal.title}</span>
-              </div>
-              <ul className={styles.dropdownList}>
-                {menu.journal.articles.map((article, index) => (
-                  <li key={index}>
-                    <a href="#" className={styles.dropdownLink}>{article}</a>
-                  </li>
-                ))}
-              </ul>
+              <img 
+                src={menu.image} 
+                alt={menu.imageAlt || ''} 
+                className={styles.dropdownImage}
+              />
             </div>
           )}
         </div>
+        <div className={styles.dropdownFooter}>
+         <ul className={styles.dropdownFooterList}>
+          <li>
+            <a href="#" className={styles.dropdownFooterLink}>Поиск по карте</a>
+          </li>
+          <li>
+            <a href="#" className={styles.dropdownFooterLink}>Справочный центр</a>
+          </li>
+          <li>
+            <a href="#" className={styles.dropdownFooterLink}>Каталог новостроек</a>
+          </li>
+          <li>
+            <a href="#" className={styles.dropdownFooterLink}>Каталог риелторов</a>
+          </li>
+         </ul>
+        </div>
+        
       </div>
     );
   };
@@ -76,10 +165,6 @@ export default function Header() {
 
           {/* Utility buttons */}
           <div className={styles.utilityButtons}>
-            <button className={styles.utilityBtn}>
-              <HiCog6Tooth />
-              <span>Умный помощник</span>
-            </button>
             <button className={styles.utilityBtn}>
               <HiBars3 />
             </button>
@@ -108,7 +193,7 @@ export default function Header() {
           <div 
             className={styles.navItem}
             onMouseEnter={() => setHoveredMenu('arenda')}
-            onMouseLeave={() => setHoveredMenu(null)}
+            // onMouseLeave={() => setHoveredMenu(null)}
           >
             <a href="#" className={styles.navLink}>Аренда</a>
             {hoveredMenu === 'arenda' && renderDropdown('arenda')}
