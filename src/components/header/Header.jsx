@@ -5,84 +5,12 @@ import styles from './header.module.scss';
 import { HiHome } from 'react-icons/hi2';
 import { HiCog6Tooth, HiBars3, HiChatBubbleLeft, HiHeart, HiBell } from 'react-icons/hi2';
 import { HiBookOpen } from 'react-icons/hi2';
+import { menuData } from './menuData';
 
 export default function Header() {
   const [hoveredMenu, setHoveredMenu] = useState(null);
 
-  const menuData = {
-    arenda: {
-      columns: [
-        {
-          title: 'Длительная аренда',
-          items: ['Квартиры', 'Комнаты', 'Дома и коттеджи']
-        },
-        {
-          title: 'Посуточная аренда',
-          items: []
-        },
-        {
-          title: 'Сдать',
-          items: []
-        }
-      ]
-    },
-    prodazha: {
-      columns: [
-        {
-          title: null,
-          items: ['Квартиры', 'Квартиры в новостройках', 'Квартиры во вторичке', 'Комнаты', 'Дома и коттеджи', 'Участки', 'Продать']
-        }
-      ]
-    },
-    novostroyki: {
-      columns: [
-        {
-          title: null,
-          items: ['Квартиры', 'Каталог жилых комплексов', 'Каталог коттеджных поселков', 'Каталог акций и скидок', 'Подобрать новостройку']
-        }
-      ]
-    },
-    doma: {
-      columns: [
-        {
-          title: null,
-          items: ['Продажа домов и дач', 'Продажа участков', 'Продажа таунхаусов', 'Аренда домов', 'Построить дом']
-        }
-      ]
-    },
-    kommercheskaya: {
-      columns: [
-        {
-          title: 'Аренда',
-          items: ['Аренда офиса', 'Аренда коворкинга', 'Аренда торговой площади', 'Аренда складского помещения']
-        },
-        {
-          title: 'Продажа',
-          items: ['Продажа офиса', 'Продажа торговой площади', 'Продажа складского помещения', 'Продажа бизнеса']
-        },
-        {
-          title: 'Бизнес-центры',
-          items: ['Торговые центры', 'Складские комплексы']
-        }
-      ]
-    },
-    ipoteka: {
-      columns: [
-        {
-          title: null,
-          items: ['Персональные ипотечные предложения', 'Господдержка', 'Ипотечный калькулятор', 'Ипотека на загородную недвижимость']
-        }
-      ],
-      journal: {
-        title: 'Циан.Журнал / Ипотека',
-        articles: [
-          'Семейная ипотека в 2025 году',
-          'Как оформить ипотеку на новостройку',
-          'Маткапитал на второго ребенка'
-        ]
-      }
-    }
-  };
+
 
   const renderDropdown = (menuKey) => {
     const menu = menuData[menuKey];
