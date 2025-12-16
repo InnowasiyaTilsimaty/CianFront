@@ -8,7 +8,7 @@ import { HiBookOpen } from 'react-icons/hi2';
 import { menuData } from './menuData';
 
 export default function Header() {
-  const [hoveredMenu, setHoveredMenu] = useState("arenda");
+  const [hoveredMenu, setHoveredMenu] = useState(null);
 
 
 
@@ -193,7 +193,7 @@ export default function Header() {
           <div 
             className={styles.navItem}
             onMouseEnter={() => setHoveredMenu('arenda')}
-            // onMouseLeave={() => setHoveredMenu(null)}
+            onMouseLeave={() => setHoveredMenu(null)}
           >
             <a href="#" className={styles.navLink}>Аренда</a>
             {hoveredMenu === 'arenda' && renderDropdown('arenda')}
