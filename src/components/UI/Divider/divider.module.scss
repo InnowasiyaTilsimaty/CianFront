@@ -1,0 +1,70 @@
+.divider {
+  background: var(--cian-gray-border);
+  flex-shrink: 0;
+}
+
+// Orientation
+.horizontal {
+  width: 100%;
+  height: 1px;
+}
+
+.vertical {
+  width: 1px;
+  height: 100%;
+}
+
+// Spacing
+.spacing {
+  margin: 4px 0;
+}
+
+.spacingCompact {
+  margin: 4px 0;
+}
+
+.spacingLarge {
+  margin: 16px 0;
+}
+
+.spacingNone {
+  margin: 0;
+}
+
+// Default spacing
+.default {
+  margin: 4px 0;
+}
+
+// Variants
+.divider.thick {
+  height: 2px;
+  
+  &.vertical {
+    width: 2px;
+    height: 100%;
+  }
+}
+
+.divider.dashed {
+  border: none;
+  background: none;
+  border-top: 1px dashed var(--cian-gray-border);
+  
+  &.vertical {
+    border-top: none;
+    border-left: 1px dashed var(--cian-gray-border);
+  }
+}
+
+.divider.dotted {
+  border: none;
+  background: none;
+  border-top: 1px dotted var(--cian-gray-border);
+  
+  &.vertical {
+    border-top: none;
+    border-left: 1px dotted var(--cian-gray-border);
+  }
+}
+

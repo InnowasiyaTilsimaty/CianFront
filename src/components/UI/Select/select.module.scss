@@ -1,0 +1,250 @@
+.selectWrapper {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+}
+
+.selectTrigger {
+  width: 100%;
+  padding: 14px 40px 14px 16px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--cian-black);
+  background: var(--cian-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  position: relative;
+  min-height: 48px;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  &:hover {
+    background-color: var(--cian-gray-border);
+  }
+
+  &:focus-within {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
+  }
+}
+
+.selectValue {
+  flex: 1;
+  min-width: 0;
+  color: var(--cian-black);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+
+  &:empty::before {
+    content: attr(data-placeholder);
+    color: var(--cian-gray);
+  }
+}
+
+.selectWrapper.disabled {
+  .selectTrigger {
+    background: var(--cian-gray-light);
+    color: var(--cian-gray);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.selectDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  background: var(--cian-white);
+  border: 1px solid var(--cian-gray-border);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    max-height 0.3s ease;
+  pointer-events: none;
+}
+
+.selectDropdown.open {
+  max-height: 300px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.selectOptions {
+  padding: 4px 0;
+}
+
+.buttonOptionsRow {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  flex-wrap: wrap;
+}
+
+.optionButton {
+  min-width: 50px;
+  height: 36px;
+  padding: 8px 12px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--cian-black);
+  background: var(--cian-white);
+  border: 1px solid var(--cian-gray-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  flex: 0 1 auto;
+
+  &:hover {
+    border-color: var(--cian-blue);
+    background: var(--cian-gray-light);
+  }
+
+  &.selected {
+    background: var(--cian-blue);
+    color: var(--cian-white);
+    border-color: var(--cian-blue);
+    font-weight: 500;
+  }
+}
+
+.checkboxOptions {
+  padding: 4px 0;
+}
+
+.selectDivider {
+  margin: 4px 0;
+  padding: 0 16px;
+}
+
+.selectOption {
+  padding: 12px 16px;
+  font-size: 15px;
+  color: var(--cian-black);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background: var(--cian-gray-light);
+  }
+
+  &.selected {
+    background: rgba(74, 158, 255, 0.1);
+    color: var(--cian-blue);
+    font-weight: 500;
+  }
+
+  &.withCheckbox {
+    padding: 8px 16px;
+    
+    &:hover {
+      background: var(--cian-gray-light);
+    }
+  }
+}
+
+.arrow {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--cian-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+
+  svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.selectWrapper:focus-within .arrow,
+.selectWrapper.open .arrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.selectWrapper.error {
+  .selectTrigger {
+    border-color: var(--cian-red-dot);
+
+    &:focus-within {
+      border-color: var(--cian-red-dot);
+      box-shadow: 0 0 0 3px rgba(255, 51, 51, 0.1);
+    }
+  }
+
+  .arrow {
+    color: var(--cian-red-dot);
+  }
+}
+
+// Variants
+.selectWrapper.compact {
+  .selectTrigger {
+    padding: 10px 36px 10px 12px;
+    font-size: 14px;
+    min-height: 40px;
+  }
+
+  .arrow {
+    right: 12px;
+
+    svg {
+      width: 10px;
+      height: 10px;
+    }
+  }
+}
+
+.selectWrapper.large {
+  .selectTrigger {
+    padding: 16px 44px 16px 20px;
+    font-size: 16px;
+    min-height: 56px;
+  }
+
+  .arrow {
+    right: 20px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+.selectWrapper.noBorder {
+  .selectTrigger {
+    border: none;
+    background: transparent;
+    padding-right: 32px;
+
+    &:focus-within {
+      box-shadow: none;
+    }
+  }
+}
+
