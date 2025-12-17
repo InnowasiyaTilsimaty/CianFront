@@ -1,0 +1,183 @@
+.propertyCard {
+  background: var(--cian-white);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; // 4:3 aspect ratio
+  overflow: hidden;
+  background: var(--cian-gray-light);
+}
+
+.favoriteButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+  color: var(--cian-white);
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.7);
+    transform: scale(1.1);
+  }
+
+  &.active {
+    background: var(--cian-red-dot);
+    color: var(--cian-white);
+
+    &:hover {
+      background: var(--cian-red-dot);
+      opacity: 0.9;
+    }
+  }
+}
+
+.content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--cian-black);
+  line-height: 1.2;
+}
+
+.propertyInfo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--cian-gray);
+  line-height: 1.4;
+}
+
+.infoItem {
+  display: inline-block;
+  
+  &:not(:last-child)::after {
+    content: '·';
+    margin-left: 8px;
+    color: var(--cian-gray);
+  }
+}
+
+.location {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  color: var(--cian-gray);
+}
+
+.locationItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.metro {
+  color: var(--cian-blue);
+  font-weight: 500;
+}
+
+.metroDistance {
+  color: var(--cian-gray);
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+.locationIcon {
+  width: 16px;
+  height: 16px;
+  color: var(--cian-gray);
+  flex-shrink: 0;
+}
+
+.address {
+  color: var(--cian-gray);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.additionalInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--cian-gray);
+  margin-top: 4px;
+}
+
+.transport {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.busIcon {
+  font-size: 16px;
+}
+
+.district {
+  color: var(--cian-gray);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .propertyCard {
+    border-radius: 8px;
+  }
+
+  .content {
+    padding: 12px;
+  }
+
+  .price {
+    font-size: 18px;
+  }
+
+  .propertyInfo,
+  .location,
+  .additionalInfo {
+    font-size: 13px;
+  }
+}
+
