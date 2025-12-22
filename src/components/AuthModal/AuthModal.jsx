@@ -7,7 +7,7 @@ import { HiXMark, HiHome } from "react-icons/hi2";
 import Checkbox from "@/components/UI/Checkbox";
 
 const AuthModal = ({ open, onClose }) => {
-  const [step, setStep] = useState("phone"); // 'phone', 'code', 'create'
+  const [step, setStep] = useState("phone"); 
   const [phone, setPhone] = useState("+993 ");
   const [code, setCode] = useState("");
   const [timer, setTimer] = useState(0);
@@ -41,9 +41,14 @@ const AuthModal = ({ open, onClose }) => {
   }, [open]);
 
   const handleGetCode = () => {
-    // Проверяем, что введено минимум 8 цифр (65 631234)
     const digits = phone.replace(/\D/g, '').replace(/^993/, '');
     if (digits.length >= 8) {
+      setStep("create");
+    }
+  };
+
+  const handleCreateAccount = () => {
+    if (agreeTerms) {
       setStep("code");
       setTimer(60);
     }
@@ -51,13 +56,6 @@ const AuthModal = ({ open, onClose }) => {
 
   const handleLogin = () => {
     if (code.length >= 4) {
-      setStep("create");
-    }
-  };
-
-  const handleCreateAccount = () => {
-    if (agreeTerms) {
-      // Логика создания аккаунта
       onClose();
     }
   };
@@ -71,10 +69,10 @@ const AuthModal = ({ open, onClose }) => {
   const formatPhone = (value) => {
     const cleaned = value.replace(/\D/g, "");
     
-    // Если начинается с 993, убираем его (будет добавлен автоматически)
+
     let digits = cleaned.startsWith('993') ? cleaned.slice(3) : cleaned;
     
-    // Ограничиваем до 8 цифр (65 631234)
+
     digits = digits.slice(0, 8);
     
     if (digits.length === 0) return "+993 ";
@@ -115,7 +113,7 @@ const AuthModal = ({ open, onClose }) => {
               onClick={handleGetCode}
               disabled={phone.replace(/\D/g, '').replace(/^993/, '').length < 8}
             >
-              Получить код
+              Продолжить
             </button>
           </>
         );
@@ -164,6 +162,12 @@ const AuthModal = ({ open, onClose }) => {
               disabled={code.length < 4}
             >
               Войти
+            </button>
+            <button
+              className={styles.secondaryButton}
+              onClick={() => setStep("create")}
+            >
+              Назад
             </button>
           </>
         );
@@ -227,13 +231,10 @@ const AuthModal = ({ open, onClose }) => {
             </button>
             <button
               className={styles.secondaryButton}
-              onClick={() => setStep("code")}
+              onClick={() => setStep("phone")}
             >
               Назад
             </button>
-            <a href="#" className={styles.supportLink}>
-              Служба поддержки
-            </a>
           </>
         );
 
