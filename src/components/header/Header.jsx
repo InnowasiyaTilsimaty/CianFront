@@ -6,9 +6,11 @@ import { HiHome } from 'react-icons/hi2';
 import { HiCog6Tooth, HiBars3, HiChatBubbleLeft, HiHeart, HiBell } from 'react-icons/hi2';
 import { HiBookOpen } from 'react-icons/hi2';
 import { menuData } from './menuData';
+import AuthModal from '@/components/AuthModal';
 
 export default function Header() {
   const [hoveredMenu, setHoveredMenu] = useState(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
 
 
@@ -180,12 +182,20 @@ export default function Header() {
             <button className={`${styles.actionBtn} ${styles.postBtn}`}>
               + Разместить за 0 Р
             </button>
-            <button className={`${styles.actionBtn} ${styles.loginBtn}`}>
+            <button 
+              className={`${styles.actionBtn} ${styles.loginBtn}`}
+              onClick={() => setIsAuthModalOpen(true)}
+            >
               Войти
             </button>
           </div>
         </div>
       </div>
+
+      <AuthModal 
+        open={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+      />
 
       {/* Navigation bar */}
       <nav className={styles.navBar}>
