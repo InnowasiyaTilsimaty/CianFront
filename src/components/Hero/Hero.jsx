@@ -7,8 +7,11 @@ import Select from '@/components/UI/Select';
 import Checkbox from '@/components/UI/Checkbox';
 import Divider from '@/components/UI/Divider';
 import PropertyCard from '@/components/PropertyCard';
+import { aptmentApi } from '@/lib/api/aptment';
 
 export default function Hero() {
+    const { data: aptmentList } = aptmentApi.useGetAptmentListQuery();
+    console.log(aptmentList);
     const [activeTab, setActiveTab] = useState('buy');
     const [favorites, setFavorites] = useState(new Set());
 

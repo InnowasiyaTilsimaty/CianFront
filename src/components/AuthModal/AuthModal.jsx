@@ -1,12 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Modal } from "antd";
+import { Modal, message } from "antd";
 import styles from "./authModal.module.scss";
 import { HiXMark, HiHome } from "react-icons/hi2";
 import Checkbox from "@/components/UI/Checkbox";
+import { authApi } from "@/lib/api/auth";
+import { setAuthData } from "@/lib/authToken/authToken";
 
 const AuthModal = ({ open, onClose }) => {
+  const [registerUser, { isLoading: isSendingOTP }] = authApi.useRegisterUserMutation();
+  const [registerVerify, { isLoading: isVerifying }] = authApi.useRegisterVerifyMutation();
+  
   const [step, setStep] = useState("phone"); 
   const [phone, setPhone] = useState("+993 ");
   const [code, setCode] = useState("");
@@ -47,22 +52,56 @@ const AuthModal = ({ open, onClose }) => {
     }
   };
 
-  const handleCreateAccount = () => {
+  const handleCreateAccount = async () => {
     if (agreeTerms) {
-      setStep("code");
-      setTimer(60);
+      // Убираем все символы кроме цифр и плюса, затем добавляем + если его нет
+      const cleaned = phone.replace(/[^\d+]/g, '');
+      const phoneNumber = cleaned.startsWith('+') ? cleaned : `+${cleaned}`;
+      try {
+        await registerUser({ phone: phoneNumber }).unwrap();
+        message.success("Код отправлен на ваш номер");
+        setStep("code");
+        setTimer(60);
+      } catch (error) {
+        const errorMessage = error?.data?.detail || error?.data?.message || error?.message || "Ошибка отправки кода";
+        message.error(errorMessage);
+      }
     }
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (code.length >= 4) {
-      onClose();
+      // Убираем все символы кроме цифр и плюса, затем добавляем + если его нет
+      const cleaned = phone.replace(/[^\d+]/g, '');
+      const phoneNumber = cleaned.startsWith('+') ? cleaned : `+${cleaned}`;
+      try {
+        const response = await registerVerify({ phone: phoneNumber, code }).unwrap();
+        // Сохраняем данные в cookies
+        if (response.token) {
+          setAuthData(response.token, response.user || response);
+          message.success("Успешная регистрация!");
+          onClose();
+        }
+      } catch (error) {
+        const errorMessage = error?.data?.detail || error?.data?.message || error?.message || "Ошибка верификации кода";
+        message.error(errorMessage);
+      }
     }
   };
 
-  const handleResendCode = () => {
+  const handleResendCode = async () => {
     if (timer === 0) {
-      setTimer(60);
+      // Убираем все символы кроме цифр и плюса, затем добавляем + если его нет
+      const cleaned = phone.replace(/[^\d+]/g, '');
+      const phoneNumber = cleaned.startsWith('+') ? cleaned : `+${cleaned}`;
+      try {
+        await registerUser({ phone: phoneNumber }).unwrap();
+        message.success("Код отправлен повторно");
+        setTimer(60);
+      } catch (error) {
+        const errorMessage = error?.data?.detail || error?.data?.message || error?.message || "Ошибка отправки кода";
+        message.error(errorMessage);
+      }
     }
   };
 
@@ -156,12 +195,12 @@ const AuthModal = ({ open, onClose }) => {
             )}
             <button
               className={`${styles.primaryButton} ${
-                code.length < 4 ? styles.disabled : ""
+                code.length < 4 || isVerifying ? styles.disabled : ""
               }`}
               onClick={handleLogin}
-              disabled={code.length < 4}
+              disabled={code.length < 4 || isVerifying}
             >
-              Войти
+              {isVerifying ? "Проверка..." : "Войти"}
             </button>
             <button
               className={styles.secondaryButton}
@@ -222,12 +261,12 @@ const AuthModal = ({ open, onClose }) => {
             </div>
             <button
               className={`${styles.primaryButton} ${
-                !agreeTerms ? styles.disabled : ""
+                !agreeTerms || isSendingOTP ? styles.disabled : ""
               }`}
               onClick={handleCreateAccount}
-              disabled={!agreeTerms}
+              disabled={!agreeTerms || isSendingOTP}
             >
-              Создать аккаунт
+              {isSendingOTP ? "Отправка..." : "Создать аккаунт"}
             </button>
             <button
               className={styles.secondaryButton}
