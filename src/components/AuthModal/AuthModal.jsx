@@ -6,7 +6,7 @@ import styles from "./authModal.module.scss";
 import { HiXMark, HiHome } from "react-icons/hi2";
 import Checkbox from "@/components/UI/Checkbox";
 import { authApi } from "@/lib/api/auth";
-import { setAuthData } from "@/lib/authToken/authToken";
+import { setAuthTokens } from "@/lib/authToken/authToken";
 
 const AuthModal = ({ open, onClose }) => {
   const [registerUser, { isLoading: isSendingOTP }] = authApi.useRegisterUserMutation();
@@ -77,9 +77,9 @@ const AuthModal = ({ open, onClose }) => {
       try {
         const response = await registerVerify({ phone: phoneNumber, code }).unwrap();
         // Сохраняем данные в cookies
-        if (response.token) {
-          setAuthData(response.token, response.user || response);
-          message.success("Успешная регистрация!");
+        if (response.tokens && response.user_id) {
+          setAuthTokens(response);
+          message.success("Успешная авторизация!");
           onClose();
         }
       } catch (error) {

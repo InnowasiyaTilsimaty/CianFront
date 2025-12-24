@@ -1,16 +1,37 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './header.module.scss';
 import { HiHome } from 'react-icons/hi2';
 import { HiCog6Tooth, HiBars3, HiChatBubbleLeft, HiHeart, HiBell } from 'react-icons/hi2';
 import { HiBookOpen } from 'react-icons/hi2';
 import { menuData } from './menuData';
 import AuthModal from '@/components/AuthModal';
+import AddListingModal from '@/components/AddListingModal';
+import { isAuthenticated, getUserPhone } from '@/lib/authToken/authToken';
 
 export default function Header() {
   const [hoveredMenu, setHoveredMenu] = useState(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isAddListingModalOpen, setIsAddListingModalOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userPhone, setUserPhone] = useState(null);
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const authenticated = isAuthenticated();
+      setIsLoggedIn(authenticated);
+      if (authenticated) {
+        setUserPhone(getUserPhone());
+      }
+    };
+
+    checkAuth();
+    // Проверяем авторизацию при закрытии модального окна
+    if (!isAuthModalOpen) {
+      checkAuth();
+    }
+  }, [isAuthModalOpen]);
 
 
 
@@ -179,15 +200,29 @@ export default function Header() {
             <button className={styles.utilityBtn}>
               <HiBell />
             </button>
-            <button className={`${styles.actionBtn} ${styles.postBtn}`}>
+            <button 
+              className={`${styles.actionBtn} ${styles.postBtn}`}
+              onClick={() => setIsAddListingModalOpen(true)}
+            >
               + Разместить за 0 Р
             </button>
-            <button 
-              className={`${styles.actionBtn} ${styles.loginBtn}`}
-              onClick={() => setIsAuthModalOpen(true)}
-            >
-              Войти
-            </button>
+            {isLoggedIn ? (
+              <button 
+                className={`${styles.actionBtn} ${styles.loginBtn}`}
+                onClick={() => {
+                  // TODO: открыть меню профиля
+                }}
+              >
+                {'Профиль'}
+              </button>
+            ) : (
+              <button 
+                className={`${styles.actionBtn} ${styles.loginBtn}`}
+                onClick={() => setIsAuthModalOpen(true)}
+              >
+                Войти
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -195,6 +230,11 @@ export default function Header() {
       <AuthModal 
         open={isAuthModalOpen} 
         onClose={() => setIsAuthModalOpen(false)} 
+      />
+
+      <AddListingModal 
+        open={isAddListingModalOpen} 
+        onClose={() => setIsAddListingModalOpen(false)} 
       />
 
       {/* Navigation bar */}

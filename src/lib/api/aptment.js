@@ -5,7 +5,7 @@ export const aptmentApi = createApi({
     reducerPath: "aptmentApi",
     baseQuery: fetchBaseQuery({
          baseUrl: process.env.NEXT_PUBLIC_API_URL,
-         prepareHeaders: (headers) => {
+         prepareHeaders: (headers, { extra, endpoint }) => {
             const authToken = getAuthToken()
             if (authToken) {
                 headers.set("Authorization", `Bearer ${authToken}`)
@@ -21,6 +21,23 @@ export const aptmentApi = createApi({
                 url: "listings/listings/",
             }),
             providesTags: () => ["aptment"],
+        }),
+        // Get aptment params
+        getAptmentParams: build.query({
+            query: () => ({
+                url: "listings/listings/params/",
+            }),
+            providesTags: () => ["aptment"],
+        }),
+
+        // Add aptment
+        addAptment: build.mutation({
+            query: (data) => ({
+                url: "listings/listings/",
+                method: "POST",
+                body: data
+            }),
+            invalidatesTags: ["aptment"]
         }),
     }),
 })
