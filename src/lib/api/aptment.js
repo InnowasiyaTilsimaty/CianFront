@@ -23,6 +23,13 @@ export const aptmentApi = createApi({
             providesTags: () => ["aptment"],
         }),
         // Get aptment params
+        getAptmentById: build.query({
+            query: (id) => ({
+                url: `listings/listings/${id}/`,
+            }),
+            providesTags: () => ["aptment"],
+        }),
+        // Get aptment params
         getAptmentParams: build.query({
             query: () => ({
                 url: "listings/listings/params/",

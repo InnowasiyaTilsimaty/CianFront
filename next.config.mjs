@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '192.168.68.111',
+        port: '8000',
+        pathname: '/media/**',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

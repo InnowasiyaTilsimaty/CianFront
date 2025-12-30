@@ -1,0 +1,686 @@
+.propertyDetail {
+  padding: 24px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Lato', sans-serif;
+  color: #333;
+
+  @media (max-width: 1240px) {
+    padding: 24px 20px;
+  }
+}
+
+.loading,
+.error {
+  padding: 4rem;
+  text-align: center;
+  font-size: 18px;
+  color: var(--cian-gray, #666);
+  background: #f8f8f8;
+  border-radius: 12px;
+  margin: 2rem auto;
+  max-width: 600px;
+}
+
+// --- Top Header ---
+.topHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e5e5;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+.addressRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.address {
+  font-size: 14px;
+  color: var(--cian-gray, #666);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mapLink {
+  font-size: 14px;
+  color: var(--cian-blue, #0070f3);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.actionIcons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+.actionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s;
+  font-size: 13px;
+
+  &:hover {
+    color: var(--cian-blue, #0070f3);
+  }
+}
+
+// --- Title ---
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--cian-black, #000);
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+// --- Gallery Section ---
+.galleryWrapper {
+  margin-bottom: 32px;
+}
+
+.mainGallery {
+  position: relative;
+  height: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--cian-gray-light, #f2f2f2);
+  margin-bottom: 12px;
+
+  @media (max-width: 1024px) {
+    height: 400px;
+  }
+
+  @media (max-width: 768px) {
+    height: 300px;
+    border-radius: 12px;
+  }
+}
+
+.mainSwiper {
+  width: 100%;
+  height: 100%;
+
+  :global(.swiper-wrapper) {
+    height: 100%;
+  }
+
+  :global(.swiper-slide) {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :global(.swiper-button-next),
+  :global(.swiper-button-prev) {
+    width: 44px;
+    height: 44px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    color: #fff;
+    transition: background 0.3s ease;
+    z-index: 20;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    &::after {
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+
+  :global(.swiper-button-prev) {
+    left: 16px;
+  }
+
+  :global(.swiper-button-next) {
+    right: 16px;
+  }
+}
+.swiper-button-prev svg{
+    width: 20px;
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #d3d3d3;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.galleryButtons {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 15;
+}
+
+.galleryButton {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+  backdrop-filter: blur(4px);
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.thumbnailsGallery {
+  height: 80px;
+  overflow: hidden;
+}
+
+.thumbnailsSwiper {
+  height: 100%;
+
+  :global(.swiper-slide) {
+    width: auto;
+    height: 100%;
+  }
+}
+
+.thumbnailSlide {
+  width: 120px;
+  height: 80px;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: var(--cian-blue, #0070f3);
+  }
+
+  :global(.swiper-slide-thumb-active) & {
+    border-color: var(--cian-blue, #0070f3);
+  }
+}
+
+.thumbnailWrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.noImageContainer {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e0e0e0;
+  border-radius: 16px;
+}
+
+// --- Main Layout (Columns) ---
+.contentWrapper {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 40px;
+  align-items: start;
+
+  @media (max-width: 968px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+// Left Column
+.mainColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.section {
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+// Characteristics Grid
+.specsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 40px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.specItem {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.specLabel {
+  color: #7d7d7d;
+  font-size: 15px;
+  position: relative;
+  z-index: 1;
+  padding-right: 8px;
+  background: #fff; 
+}
+
+.specDots {
+  flex: 1;
+  border-bottom: 1px dotted #ccc;
+  position: relative;
+  top: -5px;
+  margin: 0 4px;
+}
+
+.specValue {
+  color: #000;
+  font-size: 15px;
+  font-weight: 500;
+  background: #fff;
+  padding-left: 8px;
+  z-index: 1;
+}
+
+.descriptionText {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  white-space: pre-wrap;
+}
+
+// Right Column (Sidebar)
+.sidebar {
+  position: sticky;
+  top: 24px;
+  z-index: 10;
+}
+
+.priceCard {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.priceHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.priceBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.priceValue {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.priceType {
+  font-size: 16px;
+  font-weight: 400;
+  color: #666;
+}
+
+.priceIcons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.priceIcon {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--cian-blue, #0070f3);
+  }
+
+  &.favorite {
+    color: #ff4757;
+  }
+}
+
+.priceTrackLink {
+  font-size: 13px;
+  color: var(--cian-blue, #0070f3);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.priceOffer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.priceOfferLabel {
+  font-size: 13px;
+  color: #666;
+}
+
+.priceOfferInput {
+  display: flex;
+  gap: 8px;
+}
+
+.offerInput {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  font-size: 14px;
+
+  &:focus {
+    outline: none;
+    border-color: var(--cian-blue, #0070f3);
+  }
+}
+
+.offerButton {
+  width: 40px;
+  height: 40px;
+  background: var(--cian-blue, #0070f3);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.mortgageSection {
+  padding: 12px 0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mortgageItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--cian-blue, #0070f3);
+  }
+}
+
+.priceDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.priceDetailItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.priceDetailLabel {
+  color: #666;
+}
+
+.priceDetailValue {
+  color: #000;
+  font-weight: 500;
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.phoneButton {
+  background: var(--cian-green, #28a745);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.messageButton {
+  background: var(--cian-blue, #0070f3);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.quickResponse {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #666;
+  padding-top: 8px;
+}
+
+.agencyInfo {
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.agencyHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.agencyLogo {
+  width: 40px;
+  height: 40px;
+  background: #ff4757;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.agencyName {
+  display: flex;
+  flex-direction: column;
+}
+
+.agencyLabel {
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.agencyTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+}
+
+.agencyVerified {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--cian-blue, #0070f3);
+
+  span:first-child {
+    color: var(--cian-blue, #0070f3);
+    font-weight: 700;
+  }
+}
+
+.agencyStats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.agencyStat {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+
+  span:first-child {
+    color: #666;
+  }
+
+  span:last-child {
+    color: #000;
+    font-weight: 500;
+  }
+}
+
+.realtorInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.realtorAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.realtorDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.realtorLabel {
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.realtorName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+}

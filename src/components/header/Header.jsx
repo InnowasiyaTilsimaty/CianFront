@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './header.module.scss';
 import { HiHome } from 'react-icons/hi2';
 import { HiCog6Tooth, HiBars3, HiChatBubbleLeft, HiHeart, HiBell } from 'react-icons/hi2';
@@ -11,6 +12,7 @@ import AddListingModal from '@/components/AddListingModal';
 import { isAuthenticated, getUserPhone } from '@/lib/authToken/authToken';
 
 export default function Header() {
+  const router = useRouter();
   const [hoveredMenu, setHoveredMenu] = useState(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isAddListingModalOpen, setIsAddListingModalOpen] = useState(false);
@@ -181,7 +183,11 @@ export default function Header() {
       <div className={styles.topBar}>
         <div className={styles.topBarContent}>
           {/* Logo */}
-          <div className={styles.logo}>
+          <div 
+            className={styles.logo}
+            onClick={() => router.push('/')}
+            style={{ cursor: 'pointer' }}
+          >
             <HiHome className={styles.logoIcon} />
             <span className={styles.logoText}>ЦИАН</span>
           </div>

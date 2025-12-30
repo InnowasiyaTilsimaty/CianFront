@@ -103,3 +103,19 @@ button {
   font: inherit;
 }
 
+.ant-carousel .slick-next::after{
+  top: 10px !important;
+  left: 8px !important;
+}
+
+.ant-carousel .slick-prev::after{
+  top: 10px !important;
+  left: 12px !important;
+}
+:is(.swiper-horizontal .swiper-button-prev, .swiper-horizontal ~ .swiper-button-prev, .swiper-horizontal.swiper-rtl .swiper-button-next, .swiper-horizontal.swiper-rtl ~ .swiper-button-next) .swiper-navigation-icon {
+  width: 12px;
+}
+:is(.swiper-horizontal .swiper-button-next, .swiper-horizontal ~ .swiper-button-next, .swiper-horizontal.swiper-rtl .swiper-button-prev, .swiper-horizontal.swiper-rtl ~ .swiper-button-prev) .swiper-navigation-icon {
+  width: 12px;
+}
+
